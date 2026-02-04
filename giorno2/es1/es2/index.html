@@ -1,55 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>About me</title>
-    <style>
-        body {
-            background-color: rgb(0, 0, 0);
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About me</title>
+
+<style>
+body {
+    margin: 0;
+    background-color: rgb(67, 55, 59);
+    color: #f3e7d9;
+    font-family: Helvetica, Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.layout-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 95%;
+    max-width: 1200px;
+}
+
+#canvas-container {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.info-text {
+    max-width: 500px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .layout-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
 </head>
+
 <body>
-            <script>
 
-                let faccione
+<div class="layout-wrapper">
+    <div id="canvas-container"></div>
 
-                function preload() {
-                    faccione = loadImage("faccione.png")
-                }
+    <div class="info-text">
+        <h1>About me</h1>
+        <p>
+            Benvenuti nel mio spazio creativo. Qui l’immagine non è solo un volto,
+            ma un sistema di particelle che reagisce al movimento del mouse.
+        </p>
+        <p>
+            Uso p5.js per esplorare il confine tra codice e arte visiva.
+        </p>
+    </div>
+</div>
 
-                function setup(){
-                    createCanvas(800, 600)
-                    faccione.resize(faccione.width/7, faccione.height/7)
-                }
-                function draw(){
-                    background(0)
-                    noStroke()
-                    let numH = faccione.width
-                    let numV = faccione.height
-                    let d = 8
-                    let ox = (width- (numH-1) * d) / 2
-                    let oy = (height- (numV-1) * d) / 2
+<script>
+let faccione;
+let ready = false;
 
-                    let amount = mouseX * 0.2
-                    let nz = frameCount * 0.011
-                    let nx = frameCount * 0.021
-                    let ny = frameCount * 0.014
+function preload() {
+    faccione = loadImage(
+        "faccione.png",
+        () => {
+            faccione.resize(
+                faccione.width / 7,
+                faccione.height / 7
+            );
+            ready = true;
+        },
+        () => console.error("Errore caricamento immagine")
+    );
+}
 
-                    for(let j=0; j<numV; j++) {
-                        for(let i=0; i<numH; i++) {
-                            fill(faccione.get(i, j))
-                            let px = ox + i * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
-                            let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
-                            circle(px, py, 10)
-                      
-                    }
-                }
-                   
-            }
-        
-         </script>
- </body>
- </html>
+
+function setup() {
+    const c = createCanvas(500, 500);
+    c.parent("canvas-container");
+    background(67, 55, 59);
+}
+
+function draw() {
+    background(67, 55, 59);
+
+    if (!ready) {
+        fill(243, 231, 217);
+        textAlign(CENTER, CENTER);
+        text("loading...", width / 2, height / 2);
+        return;
+    }
+
+    noStroke();
+    
+
+    let numH = faccione.width;
+    let numV = faccione.height;
+    let d = 8;
+
+    let ox = (width - (numH - 1) * d) / 2;
+    let oy = (height - (numV - 1) * d) / 2;
+
+    let amount = mouseX * 0.2;
+    let nz = frameCount * 0.01;
+    let nx = frameCount * 0.02;
+    let ny = frameCount * 0.015;
+
+    for (let j = 0; j < numV; j++) {
+        for (let i = 0; i < numH; i++) {
+            fill(faccione.get(i, j));
+
+            let px = ox + i * d + map(
+                noise(i * 0.02 + nx, j * 0.02 + ny, nz),
+                0, 1, -amount, amount
+            );
+
+            let py = oy + j * d + map(
+                noise(i * 0.02 + nx, j * 0.02 + ny, nz),
+                0, 1, -amount, amount
+            );
+
+            circle(px, py, 7);
+        }
+    }
+}
+</script>
+
+</body>
+</html>
