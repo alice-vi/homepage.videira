@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>About me</title>
+    <style>
+        body {
+            background-color: rgb(0, 0, 0);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+</head>
+<body>
+            <script>
+
+                let faccione
+
+                function preload() {
+                    faccione = loadImage("faccione.png")
+                }
+
+                function setup(){
+                    createCanvas(800, 600)
+                    faccione.resize(faccione.width/7, faccione.height/7)
+                }
+                function draw(){
+                    background(0)
+                    noStroke()
+                    let numH = faccione.width
+                    let numV = faccione.height
+                    let d = 8
+                    let ox = (width- (numH-1) * d) / 2
+                    let oy = (height- (numV-1) * d) / 2
+
+                    let amount = mouseX * 0.2
+                    let nz = frameCount * 0.011
+                    let nx = frameCount * 0.021
+                    let ny = frameCount * 0.014
+
+                    for(let j=0; j<numV; j++) {
+                        for(let i=0; i<numH; i++) {
+                            fill(faccione.get(i, j))
+                            let px = ox + i * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
+                            let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
+                            circle(px, py, 10)
+                      
+                    }
+                }
+                   
+            }
+        
+         </script>
+ </body>
+ </html>
