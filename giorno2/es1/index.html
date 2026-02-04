@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+</head>
+<body>
+    
+    
+            <script>
+                function setup(){
+                    createCanvas(600, 600)
+                    background(200, 200, 200)
+                   
+                
+                }
+                function draw() {
+
+                noStroke()
+               
+                fill(mouseX, mouseY,87)
+                    ellipse(mouseX, mouseY, 100, 100)
+                    ellipse(width-mouseX, mouseY, 100, 100)
+                    
+                }
+
+        
+         </script>
+         <style>
+         html, body {
+  margin: 0;
+  padding: 0;
+  background: black;}
+  </style>
+ </body>
+ </html>
