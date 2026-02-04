@@ -54,20 +54,20 @@ nav a:hover {
 /* ===== LETTERE ===== */
 .letter {
   position: absolute;
-  font-size: 64px;
+  font-size: 70px;
+  letter-spacing: 5px;
   user-select: none;
   transition: all 1s ease;
+  
 }
 
-.letter.inactive {
-  pointer-events: none;
-}
+
 
 /* ===== SUBTITLE ===== */
 #subtitle {
   position: absolute;
   font-size: 18px;
-  letter-spacing: 4px;
+  letter-spacing: 10px;
   opacity: 0;
   transition: opacity .8s ease;
   pointer-events: none;
@@ -109,8 +109,8 @@ nav a:hover {
 <!-- NAV -->
 <nav id="nav">
   <a href="../../giorno2/es1/es2/index.html">About me</a>
-  <a href="../../giorno2/es1/index.html">Project 1</a>
-  <a href="project2.html">Project 2</a>
+  <a href="../../giorno2/es1/index.html">Color</a>
+  <a href="../../giorno3/es1/index 2.html">Dragon</a>
   <a href="project3.html">Project 3</a>
 </nav>
 
@@ -162,11 +162,20 @@ title.split("").forEach(char => {
   letters.push(span);
 });
 
+function getRandomGroupPosition() {
+  return {
+    x: Math.random() * (window.innerWidth * 0.6) + window.innerWidth * 0.2,
+    y: Math.random() * (window.innerHeight * 0.6) + window.innerHeight * 0.2
+  };
+}
+
+
 function group() {
   clearTimeout(timer);
 
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
+  const pos = getRandomGroupPosition();
+  const cx = pos.x;
+  const cy = pos.y;
 
   let total = letters.reduce((s, l) => s + l.offsetWidth, 0);
   let start = cx - total / 2;
@@ -174,6 +183,7 @@ function group() {
   letters.forEach(l => {
     l.style.left = start + "px";
     l.style.top = cy + "px";
+     l.classList.add("inactive");
     
     start += l.offsetWidth;
   });
@@ -201,7 +211,7 @@ function scatter() {
   letters.forEach(l => {
     l.style.left = l.dataset.x + "px";
     l.style.top = l.dataset.y + "px";
-    l.classList.remove("inactive");
+   
   });
 
   grouped = false;
