@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Color</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+</head>
+<body>
+    
+    
+            <script>
+                function setup(){
+                    createCanvas(windowWidth, windowHeight)
+                    background(0, 0, 0)
+                   
+                
+                }
+                function draw() {
+
+                //noStroke()
+               
+                fill(mouseX, mouseY, 200)
+                    ellipse(mouseX, mouseY, 100, 100)
+                    ellipse(width-mouseX, mouseY, 100, 100)
+                    
+                }
+
+        
+         </script>
+         <style>
+         html, body {
+  margin: 0;
+  padding: 0;
+  background: black;}
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Evita la comparsa di barre di scorrimento */
+            background-color: black;
+        }
+        canvas {
+            display: block; /* Rimuove piccoli spazi bianchi sotto il canvas */
+        }
+  </style>
+ </body>
+ </html>
