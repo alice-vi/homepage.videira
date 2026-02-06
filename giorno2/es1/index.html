@@ -10,21 +10,35 @@
     
     
             <script>
-                function setup(){
-                    createCanvas(windowWidth, windowHeight)
-                    background(0, 0, 0)
-                   
-                
-                }
-                function draw() {
+let blueColor;
+let orangeColor;
+let t = 0;
 
-                //noStroke()
-               
-                fill(mouseX, mouseY, 200)
-                    ellipse(mouseX, mouseY, 100, 100)
-                    ellipse(width-mouseX, mouseY, 100, 100)
-                    
-                }
+function setup(){
+    createCanvas(windowWidth, windowHeight);
+    background(0);
+
+    blueColor = color(0, 100, 255);     // blu
+    orangeColor = color(255, 140, 0);   // arancione
+}
+
+function draw() {
+   
+    let lerpValue = (sin(t) + 1) / 2;
+
+    // colore interpolato
+    let currentColor = lerpColor(blueColor, orangeColor, lerpValue);
+
+    //noStroke();
+    fill(currentColor);
+
+    ellipse(mouseX, mouseY, 100, 100);
+    ellipse(width - mouseX, mouseY, 100, 100);
+
+    // velocità della transizione
+    t += 0.02;
+}
+
 
         
          </script>
