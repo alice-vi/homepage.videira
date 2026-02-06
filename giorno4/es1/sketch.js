@@ -30,8 +30,8 @@ function windowResized() {
 }
 
 function draw() {
-	background("#1446a0")
-	stroke("#FCA718")
+	background("#020b68")
+	stroke("#cb7900")
 	noFill()
 	strokeWeight(1)
 
